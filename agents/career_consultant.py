@@ -13,8 +13,8 @@ _tavily = TavilySearch(max_results=5)
 _agent = create_deep_agent(
     model=llm,
     tools=[_tavily, score_cv, format_cv],
-    backend=FilesystemBackend(root_dir="."),
-    skills=["skills/"],
+    backend=FilesystemBackend(root_dir=".", virtual_mode=True),
+    skills=["/skills/"],
     system_prompt=(
         "You are a senior career consultant and CV specialist. "
         "Use the cv-rewriter skill to research current market standards and rewrite the CV. "
