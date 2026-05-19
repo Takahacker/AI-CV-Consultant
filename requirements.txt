@@ -1,0 +1,11 @@
+python-dotenv
+langgraph
+langgraph-prebuilt
+langchain
+langchain-core
+langchain-nvidia-ai-endpoints
+langchain-tavily
+langsmith
+deepagents
+streamlit
+pypdf
