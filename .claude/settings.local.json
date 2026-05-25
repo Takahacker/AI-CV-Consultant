@@ -4,7 +4,13 @@
       "Bash(python \"c:/Users/kikep/OneDrive/Documentos/7Sem/LLM/AI-CV-Consultant/_extract_nb.py\" \"c:/Users/kikep/OneDrive/Documentos/7Sem/LLM/AI-CV-Consultant/arquivos_base_aula/langchain_2-1.ipynb\")",
       "Bash(python \"c:/Users/kikep/OneDrive/Documentos/7Sem/LLM/AI-CV-Consultant/_extract_nb.py\" \"c:/Users/kikep/OneDrive/Documentos/7Sem/LLM/AI-CV-Consultant/arquivos_base_aula/langchain_2-2.ipynb\")",
       "Bash(pip show *)",
-      "Bash(python -c ' *)"
+      "Bash(python -c ' *)",
+      "Bash(python -c \"from fpdf import FPDF; print\\('fpdf ok'\\)\")",
+      "Bash(curl -s http://localhost:8501)",
+      "Bash(open http://localhost:8501)",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('app.py'\\).read\\(\\)\\); print\\('ok'\\)\")",
+      "Bash(pkill -f \"streamlit run\")",
+      "Bash(streamlit run *)"
     ]
   }
 }

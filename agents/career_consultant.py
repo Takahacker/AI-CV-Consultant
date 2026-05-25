@@ -89,8 +89,15 @@ Use the cv-rewriter skill. Research the market first, then rewrite and score ite
                 continue
             raise
 
-    # Extrair a última mensagem do agente
-    last_msg = result["messages"][-1].content
+    # Encontrar a última mensagem de texto real (ignora tool calls JSON)
+    last_msg = ""
+    for msg in reversed(result["messages"]):
+        content = getattr(msg, "content", "") or ""
+        if isinstance(content, str) and content.strip() and not content.strip().startswith('{"type":'):
+            last_msg = content
+            break
+    if not last_msg:
+        last_msg = getattr(result["messages"][-1], "content", "") or ""
 
     try:
         import re
