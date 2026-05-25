@@ -1,7 +1,7 @@
 import json
 from graph.state import CVState
 from tools.cv_parser import parse_cv
-from config.settings import llm
+from config.settings import llm_invoke
 
 
 def input_processor_node(state: CVState) -> CVState:
@@ -23,7 +23,7 @@ Return ONLY the JSON object.
 TEXT:
 {raw}
 """
-        response = llm.invoke(prompt)
+        response = llm_invoke(prompt)
         try:
             parsed = json.loads(response.content)
         except json.JSONDecodeError:

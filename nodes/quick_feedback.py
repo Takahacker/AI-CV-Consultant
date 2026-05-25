@@ -1,7 +1,7 @@
 import json
 from graph.state import CVState
 from tools.cv_formatter import format_cv
-from config.settings import llm
+from config.settings import llm_invoke
 
 
 def quick_feedback_node(state: CVState) -> CVState:
@@ -17,7 +17,7 @@ Be specific and actionable. Use the gaps below as reference.
 Gaps identified: {json.dumps(state['gaps'], ensure_ascii=False)}
 Role: {state['job_requirements'].get('role_title', 'the target role')}
 """
-    feedback = llm.invoke(prompt).content
+    feedback = llm_invoke(prompt).content
     formatted = format_cv.invoke({"cv_data": state["parsed_cv"]})
 
     return {**state, "revised_cv": formatted, "final_report": feedback}

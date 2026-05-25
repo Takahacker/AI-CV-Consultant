@@ -1,7 +1,7 @@
 import json
 from graph.state import CVState
 from tools.cv_formatter import format_cv
-from config.settings import llm
+from config.settings import llm_invoke
 
 
 def report_generator_node(state: CVState) -> CVState:
@@ -36,7 +36,7 @@ Gaps: {json.dumps(gaps, ensure_ascii=False)}
 Matched keywords: {json.dumps(matched, ensure_ascii=False)}
 Iterations used: {state.get('iterations', 0)}
 """
-    report = llm.invoke(prompt).content
+    report = llm_invoke(prompt).content
 
     # Se o CV ainda não foi formatado (veio do quick_feedback, já está pronto)
     revised = state.get("revised_cv", "")

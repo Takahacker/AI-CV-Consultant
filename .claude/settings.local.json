@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python \"c:/Users/kikep/OneDrive/Documentos/7Sem/LLM/AI-CV-Consultant/_extract_nb.py\" \"c:/Users/kikep/OneDrive/Documentos/7Sem/LLM/AI-CV-Consultant/arquivos_base_aula/langchain_2-1.ipynb\")",
+      "Bash(python \"c:/Users/kikep/OneDrive/Documentos/7Sem/LLM/AI-CV-Consultant/_extract_nb.py\" \"c:/Users/kikep/OneDrive/Documentos/7Sem/LLM/AI-CV-Consultant/arquivos_base_aula/langchain_2-2.ipynb\")",
+      "Bash(pip show *)"
+    ]
+  }
+}

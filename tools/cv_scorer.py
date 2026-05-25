@@ -1,6 +1,6 @@
 import json
 from langchain_core.tools import tool
-from config.settings import llm
+from config.settings import llm_invoke
 
 
 @tool
@@ -26,7 +26,7 @@ CV:
 JOB REQUIREMENTS:
 {json.dumps(job_requirements, ensure_ascii=False, indent=2)}
 """
-    response = llm.invoke(prompt)
+    response = llm_invoke(prompt)
     try:
         return json.loads(response.content)
     except json.JSONDecodeError:

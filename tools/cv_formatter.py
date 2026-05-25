@@ -1,6 +1,6 @@
 import json
 from langchain_core.tools import tool
-from config.settings import llm
+from config.settings import llm_invoke
 
 
 @tool
@@ -36,5 +36,5 @@ Return ONLY the Markdown, no explanation.
 CV DATA:
 {json.dumps(cv_data, ensure_ascii=False, indent=2)}
 """
-    response = llm.invoke(prompt)
+    response = llm_invoke(prompt)
     return response.content

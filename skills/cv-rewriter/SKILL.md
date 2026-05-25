@@ -10,7 +10,7 @@ Rewrite CV sections using results-oriented language aligned with the target job'
 
 ## Workflow
 1. Read the current CV, job requirements, gaps, current score, and iteration count from the task.
-2. Use `TavilySearch` to research:
+2. Use the `web_search` tool to research (pass a single plain-text `query` string):
    - `"best CV bullet points for [role_title] [current year]"`
    - `"ATS keywords for [role_title]"`
    - `"required skills [role_title] job market"`

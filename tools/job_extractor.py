@@ -1,6 +1,6 @@
 import json
 from langchain_core.tools import tool
-from config.settings import llm
+from config.settings import llm_invoke
 
 
 @tool
@@ -20,7 +20,7 @@ Return ONLY the JSON object, no explanation.
 JOB DESCRIPTION:
 {job_description}
 """
-    response = llm.invoke(prompt)
+    response = llm_invoke(prompt)
     try:
         return json.loads(response.content)
     except json.JSONDecodeError:

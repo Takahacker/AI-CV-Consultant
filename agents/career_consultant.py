@@ -1,6 +1,7 @@
 import json
 from deepagents import create_deep_agent
 from deepagents.backends.filesystem import FilesystemBackend
+from langchain_core.tools import tool
 from langchain_tavily import TavilySearch
 
 from graph.state import CVState
@@ -8,11 +9,41 @@ from tools.cv_scorer import score_cv
 from tools.cv_formatter import format_cv
 from config.settings import llm, MAX_ITERATIONS, SCORE_THRESHOLD
 
-_tavily = TavilySearch(max_results=5)
+_tavily_raw = TavilySearch(max_results=5)
+
+
+@tool
+def web_search(query: str) -> str:
+    """Search the web for current information about a topic.
+
+    Use to research ATS keywords, CV best practices for a specific role, and
+    current job-market expectations. Accepts a plain text query only.
+
+    Args:
+        query: The search query string (e.g., "ATS keywords data scientist 2025").
+
+    Returns:
+        A formatted string with up to 5 results (title, URL, snippet).
+    """
+    try:
+        result = _tavily_raw.invoke({"query": query})
+    except Exception as e:
+        return f"Search failed: {e}"
+    items = result.get("results", []) if isinstance(result, dict) else []
+    if not items:
+        return "No results found."
+    lines = []
+    for r in items[:5]:
+        title = r.get("title", "") or ""
+        url = r.get("url", "") or ""
+        content = (r.get("content", "") or "")[:300]
+        lines.append(f"- {title}\n  {url}\n  {content}")
+    return "\n".join(lines)
+
 
 _agent = create_deep_agent(
     model=llm,
-    tools=[_tavily, score_cv, format_cv],
+    tools=[web_search, score_cv, format_cv],
     backend=FilesystemBackend(root_dir=".", virtual_mode=True),
     skills=["/skills/"],
     system_prompt=(
