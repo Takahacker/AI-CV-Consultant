@@ -1,4 +1,5 @@
 import json
+import time
 from deepagents import create_deep_agent
 from deepagents.backends.filesystem import FilesystemBackend
 from langchain_core.tools import tool
@@ -77,7 +78,16 @@ Gaps to address:
 
 Use the cv-rewriter skill. Research the market first, then rewrite and score iteratively.
 """
-    result = _agent.invoke({"messages": [{"role": "user", "content": prompt}]})
+    max_retries, base_delay = 5, 3.0
+    for attempt in range(max_retries):
+        try:
+            result = _agent.invoke({"messages": [{"role": "user", "content": prompt}]})
+            break
+        except Exception as e:
+            if "429" in str(e) and attempt < max_retries - 1:
+                time.sleep(base_delay * (2 ** attempt))
+                continue
+            raise
 
     # Extrair a última mensagem do agente
     last_msg = result["messages"][-1].content
